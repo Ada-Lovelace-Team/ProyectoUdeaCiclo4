@@ -1,0 +1,33 @@
+{
+  "name": "proyectoudeaciclo4",
+  "version": "1.0.0",
+  "description": "Tienda virtual proyecto Mintic",
+  "main": "server.js",
+  "scripts": {
+    "start": "node back/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon back/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon back/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaC1997/ProyectoUdeaCiclo4.git"
+  },
+  "keywords": [
+    "Ada",
+    "Lovelace"
+  ],
+  "author": "Grupo Ada Lovelace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnaC1997/ProyectoUdeaCiclo4/issues"
+  },
+  "homepage": "https://github.com/AnaC1997/ProyectoUdeaCiclo4#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
