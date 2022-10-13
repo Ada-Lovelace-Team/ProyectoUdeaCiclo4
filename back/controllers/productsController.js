@@ -12,6 +12,10 @@ exports.getProducts=(req,res,next) =>{
 
  // Crear nuevo producto /api/productos
  exports.newProduct=async(req, res, next) =>{
-    const product= await producto.create(req.body)
+    const product= await producto.create(req.body);
 
- }
+    res.status(201).json({
+        sucess: true,
+        product 
+        })
+}

@@ -6,8 +6,10 @@ const router=express.Router();
 //Traemos la respuesta json desde el controlador
 // Como lo que retorna es un json se pone entre llaves
 const {getProducts, newProduct} = require("../controllers/productsController")
+
 //Establecemos desde que ruta queremos el get
 router.route('/productos').get(getProducts)
+
 //Establecemos ruta para el post
 router.route('/producto/nuevo').post(newProduct)
 
