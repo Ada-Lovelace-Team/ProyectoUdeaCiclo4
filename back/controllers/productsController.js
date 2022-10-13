@@ -1,6 +1,7 @@
 const producto=require("../models/productos")
 
 //Crear la lista de productos
+// Estado 200 porque es una consulta OK 
 exports.getProducts=(req,res,next) =>{
     res.status(200).json({
         sucess:true,
@@ -10,7 +11,6 @@ exports.getProducts=(req,res,next) =>{
  }
 
  // Crear nuevo producto /api/productos
-
  exports.newProduct=async(req, res, next) =>{
     const product= await producto.create(req.body)
 
