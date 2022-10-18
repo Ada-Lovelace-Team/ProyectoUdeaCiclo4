@@ -1,4 +1,6 @@
-const producto=require("../models/productos")
+/* const producto=require("../models/productos") */
+const producto=require("../models/producto")
+
 
 //Crear la lista de productos
 // Estado 200 porque es una consulta OK 
