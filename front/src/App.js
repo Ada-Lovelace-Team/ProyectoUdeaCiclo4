@@ -1,12 +1,13 @@
 
 import './App.css';
 import React from 'react';
+import header from './componentes/layout/header';
 
 function App() {
   return (
     <div className="App">
-      <h1>Calzado deportivo Comfort Life</h1>
-        <img src="./imagenes/comfort life.png" alt="Aqui esta el logo"></img>
+      <header/>
+      
       
     </div>
   );
