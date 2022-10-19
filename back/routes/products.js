@@ -7,10 +7,9 @@ const router=express.Router();
 // Como lo que retorna es un json se pone entre llaves
 const {getProducts, newProduct} = require("../controllers/productsController")
 
-//Establecemos desde que ruta queremos el get
-router.route('/productos').get(getProducts)
 
-//Establecemos ruta para el post
-router.route('/producto/nuevo').post(newProduct)
+
+router.route('/productos').get(getProducts) //ruta queremos el get
+router.route('/productos/nuevo').post(newProduct)//Establecemos ruta para el post
 
 module.exports=router;

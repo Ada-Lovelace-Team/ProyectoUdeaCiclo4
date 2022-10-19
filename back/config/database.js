@@ -11,7 +11,7 @@ const connectDatabase = () =>{
     }).then(con =>{
         console.log(`Base de datos mongo conectada con el servidor: ${con.connection.host}`)
     }).catch(con =>{
-        console.log(`No se logró la conexion con la base de datos`)
+        console.log(`No se logró la conexión con la base de datos`)
     })
 }
 
