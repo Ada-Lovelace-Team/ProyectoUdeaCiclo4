@@ -124,4 +124,4 @@ fechaCreacion:{
 
 })
 
-module.exports=mongoose.model("productos",productosSchema)
+module.exports=mongoose.model("productos",productosSchema) 
