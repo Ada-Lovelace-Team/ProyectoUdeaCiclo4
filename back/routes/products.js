@@ -4,12 +4,16 @@ const express= require("express")
 const router=express.Router();
 
 //Traemos la respuesta json desde el controlador
-// Como lo que retorna es un json se pone entre llaves
-const {getProducts, newProduct} = require("../controllers/productsController")
-
-
-
-router.route('/productos').get(getProducts) //ruta queremos el get
-router.route('/productos/nuevo').post(newProduct)//Establecemos ruta para el post
+const {getProducts, newProduct, getProductById, updateProduct, deleteProduct} = require("../controllers/productsController")
+//Establecemos desde que ruta queremos el get
+router.route('/productos').get(getProducts)
+//Establecemos ruta para el post
+router.route('/producto/nuevo').post(newProduct)
+// El simbolo : indica que el id hace parte de los parametros a consultar (GET)
+router.route('/producto/:id').get(getProductById)
+//Ruta para actulizar el producto (PUT)
+router.route('/producto/:id').put(updateProduct);
+//Ruta de eliminacion por ID
+router.route('/producto/:id').delete(deleteProduct);
 
 module.exports=router;
