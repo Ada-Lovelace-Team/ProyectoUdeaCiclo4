@@ -1,13 +1,23 @@
 
 import './App.css';
 import React from 'react';
-import header from './componentes/layout/header';
+import Header from './componentes/layout/Header';
+import {Footer} from './componentes/layout/Footer'
 
 function App() {
   return (
     <div className="App">
-      <header/>
-      
+        <Header/>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <center>Contenido aqui</center>
+        <Footer/>
       
     </div>
   );

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 
-const header = () => {
+const Header = () => {
   return (
     <Fragment>
       <nav className="navbar row">
-        <div className="col - 12 col-md-4">
+        <div className="col - 12 col-md-2">
           <div className= "navbar-brand">
             <img src="./imagenes/comfort life.png" alt="Confort life calzado deportivo logo"></img>
           </div>
@@ -19,7 +19,7 @@ const header = () => {
                 placeholder= "¿Que buscas?"
                 <div class="input-group-append">
                   <button id="search-btn" class="btn">
-                    <i class="fa fa fa" aria-hidden="true"></i>
+                    <i class="fa fa- shearch-plus fa-2x" aria-hidden="true"></i>
                   </button>
                 </div>
           </div>
@@ -38,4 +38,4 @@ const header = () => {
   )
 }
 
-export default header
+export default Header
