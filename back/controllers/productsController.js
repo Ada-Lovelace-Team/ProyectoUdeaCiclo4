@@ -5,6 +5,15 @@ const producto=require("../models/productos")
 //Crear la lista de productos
 exports.getProducts= async (req,res,next) =>{
     const productos= await producto.find(); // traera la lista de productos
+    if (!productos){
+        return restart.status(404).json({
+            succes:false,
+            error:true
+
+        })
+ }
+    
+    
     res.status(200).json({
         sucess:true,
         cantidad: productos.length,
