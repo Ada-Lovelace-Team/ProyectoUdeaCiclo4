@@ -1,4 +1,6 @@
 const express= require("express")
+
+// Se crea un enrutador
 const router=express.Router();
 
 //Traemos la respuesta json desde el controlador

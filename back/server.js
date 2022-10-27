@@ -4,7 +4,7 @@ const connectDatabase = require("./config/database");
 
 //Setear el archivo de configuration
 const dotenv=require("dotenv");
-dotenv.config({path:'back/config/config.env'})
+dotenv.config({ path:'back/config/config.env'})
 
 //configuramos la base de datos 
 connectDatabase();
