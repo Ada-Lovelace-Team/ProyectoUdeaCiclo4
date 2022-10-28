@@ -27,7 +27,8 @@ exports.getProducts= async (req,res,next) =>{
     if (!product){
         return res.status(404).json({
             success:false,
-            message:'No encontramos ese producto'
+            message:'No encontramos ese producto',
+            error:true
 
         })
     }
@@ -90,14 +91,14 @@ exports.updateProduct= async (req,res,next) =>{
 
 
  }
- /* MECANISMO FETCH
+ //MECANISMO FETCH
  function verProductos(){
     fetch('http://localhost:4000/api/productos')
     .then(res=>res.json())
     .then(res=>console.log(res))
     .catch(err=>console.error(err))
 }
-verProductos(); Llamamos al metodo para probar la consulta
+//verProductos(); Llamamos al metodo para probar la consulta
 
 //Ver productos por ID
 function verProductoPorID(id){
@@ -107,4 +108,4 @@ function verProductoPorID(id){
     .catch(err=>console.error(err))
 }
 
-verProductoPorID('6346db0857a0b9460f590dae');*/
+//verProductoPorID('6346db0857a0b9460f590dae');*/
