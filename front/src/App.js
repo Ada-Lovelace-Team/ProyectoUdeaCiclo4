@@ -3,10 +3,9 @@ import React from 'react';
 import Header from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import Home from './components/Home';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ProductDetails } from './components/products/ProductDetails';
 import Navbar from './components/layout/Navbar';
-
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
@@ -14,11 +13,11 @@ function App() {
     <div className="App">
       <Header/>
       <Navbar />
-
       <div className='container container-fluid'>
         <Routes>
           <Route path="/" element={<Home /> }/>
           <Route path="/Home" element={<Home /> }/>
+          <Route path="/producto/:id" element={<ProductDetails />}/>
          </Routes>
       </div>
       <Footer />
