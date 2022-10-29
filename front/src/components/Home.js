@@ -10,13 +10,14 @@ export const Home = () => {
     const alert=useAlert();
 
     const dispatch = useDispatch();
-    useEffect( () =>{
+    useEffect(() =>{
         if (error){
             return alert.error(error)
         }
         dispatch(getProducts());
         //alert.succes("....") Generara una alerta
     },[dispatch])
+    
   return (
     <Fragment>
         {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw">Loading...</i>:(
