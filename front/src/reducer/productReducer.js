@@ -26,6 +26,23 @@ import { ALL_PRODUCTS_REQUEST,
                     loading:false,
                     error: action.payload
                 }
+                case PRODUCT_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case PRODUCT_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                product: action.payload
+            }
+
+        case PRODUCT_DETAILS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
     
             case CLEAR_ERRORS:
                 return{

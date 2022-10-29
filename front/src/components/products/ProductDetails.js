@@ -10,8 +10,17 @@ import { Carousel } from 'react-bootstrap'
 export const ProductDetails = () => {
     const loading=false
     const error=undefined
-    const product = useSelector(state =>state)
-    console.log(product)
+    const state = useSelector(state =>state)
+
+    let product = {}
+
+    if (state.products.product) {
+
+      product = state.products.product;
+
+      console.log(product)
+
+    }
     const {id} =useParams();
     const dispatch= useDispatch();
     const alert= useAlert();
