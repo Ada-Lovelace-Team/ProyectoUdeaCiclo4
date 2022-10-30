@@ -16,4 +16,5 @@ router.route('/producto/:id').put(updateProduct);
 //Ruta de eliminacion por ID
 router.route('/producto/:id').delete(deleteProduct);
 
+
 module.exports=router;
