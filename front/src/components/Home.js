@@ -23,7 +23,7 @@ export const Home = () => {
         {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw">Loading...</i>:(
             <Fragment>
                 <MetaData title="El placer de la comodidad"></MetaData>
-        <h1 id="encabezado_productos">Nuevos modelos</h1>
+        <h1 id="encabezado_productos"><center>Nuevos productos</center></h1>
         <section id="productos" className='container mt-5'>
             <div className='row'>
             {productos && productos.map (producto => (
