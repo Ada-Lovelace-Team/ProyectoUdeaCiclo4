@@ -1,9 +1,11 @@
 const express=require("express");
 const app=express();
 const errorMiddleware =require("./middleware/error")
+const cookieParse=require("cookie-parser")
 
-// App usará herramientas que expres relacionadas a json
+// Uso de constantes importadas
 app.use(express.json());
+app.use(cookieParse());
 
 //Importamos rutas
 const productos=require("./routes/products")
