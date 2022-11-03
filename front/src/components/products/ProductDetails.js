@@ -80,12 +80,24 @@ export const ProductDetails = () => {
               <span id="No_de_reviews">  ({product.numCalificaciones} Reviews)</span>
               <hr />
               <p id="precio_producto">${product.precio}</p>
+              <div class="btn-group">
+              <hr />
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            talla
+           </button>
+        <hr />
+           <div class="dropdown-menu">
+           <p id="product_id"> {product.talla}</p>
+            <hr />
+           </div>
+        </div>
+        <hr />
               <div className="stockCounter d-inline">
                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
                 <input type="number" className="form-control count d-inline"  value={quantity} readOnly/>
                 <span className="btn btn-primary plus"onClick={increaseQty}>+</span>
              </div>
-                <button type="button" id="carrito_btn" className="btn btn-primary d-inline ml-4" disabled={product.inventario===0}>Agregar al Carrito</button>
+                <button type="button" id="carrito_btn" className="btn btn-success d-inline ml-4" disabled={product.inventario===0}>Agregar al Carrito</button>
               <hr />
               <p>Estado: <span id="stock_stado" className={product.inventario>0 ? 'greenColor':'orangeColor'}>{product.inventario>0 ? "En existencia": "Agotado"}</span></p>
               <hr />
