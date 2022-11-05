@@ -8,7 +8,7 @@ const Sidebar = () => {
                 <ul className="list-unstyled components">
 
                     <li>
-                        <Link to="/Dashboard"><i className="fa fa-tachometer"></i> Administración</Link>
+                        <Link to="/dashboard"><i className="fa fa-tachometer"></i> Administración</Link>
                     </li>
 
                     <li>
@@ -16,15 +16,15 @@ const Sidebar = () => {
                             className="fa fa-product-hunt"></i> Productos</a>
                         <ul className="collapse list-unstyled" id="productSubmenu">
                             <li>
-                                <Link to="/admin/listaProductos"><i className="fa fa-clipboard"></i> Lista productos</Link>
+                                <Link to="/listaProductos"><i className="fa fa-clipboard"></i> Lista productos</Link>
                             </li>
 
                             <li>
-                                <Link to="/admin/nuevoProducto"><i className="fa fa-plus"></i> Agregar producto</Link>
+                                <Link to="/nuevoProducto"><i className="fa fa-plus"></i> Agregar producto</Link>
                             </li>
 
                             <li>
-                                <Link to="/admin/modProducto"><i className="fa fa-clipboard"></i> Modificar producto</Link>
+                                <Link to="/modProducto"><i className="fa fa-clipboard"></i> Modificar producto</Link>
                             </li>
 
                         </ul>
