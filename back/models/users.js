@@ -2,7 +2,11 @@ const mongoose = require ("mongoose")
 const validator =require ("validator")
 const bcrypt =require ("bcryptjs")
 const jwt=require("jsonwebtoken")
+const crypto= require ("crypto")
+
+
 const usuarioSchema = new mongoose.Schema({
+
     nombre: {
         type: String,
         required: [true, "Por favor ingrese el nombre"],
@@ -56,6 +60,7 @@ usuarioSchema.methods.compararPass = async function (passDada){
     return await bcrypt.compare(passDada, this.clave)
 }
 
+
 //Retornaremos un JWT token 
 usuarioSchema.methods.getJwtToken = function () {
     return jwt.sign({id: this._id}, process.env.JWT_SECRET, {
@@ -63,8 +68,21 @@ usuarioSchema.methods.getJwtToken = function () {
     }
         )
 
-}
+} 
 
+// Generamos un token para reset 
+
+usuarioSchema.methods.genResetPasswordToken =function(){
+    const resetToken = crypto.randomBytes(20).toString('hex')
+
+
+// hashear un token para reset de contrasena
+this.resetPasswordToken =crypto.createHash("sha256").update(resetToken).digest('hex')
+
+// setear fecha de expiracion 
+this.resetPasswordExprire= Date.now()+ 30*60*1000 //el token dura solo 30 min
+return resetToken
+} 
 module.exports = mongoose.model("users",usuarioSchema)
 
 
