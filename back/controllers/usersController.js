@@ -135,3 +135,111 @@ exports.resetPassword = catchAsyncErrors(async (req,res,next) =>{
     await user.save();
     tokenEnviado(user, 200, res)
 })
+// ver perfil de usuario, usuario logueado
+
+exports.getUserProfile =catchAsyncErrors (async(req, res, next)=>{
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+//update contrasena de usuario logueado
+exports.updatePassword= catchAsyncErrors(async (req, res, next) =>{
+    const user= await User.findById(req.user.id).select("+clave");
+
+    //Revisamos si la contraseña antigua es igual a la nueva
+    const mismaClave = await user.compararPass(req.body.oldPassword)
+
+    if (!mismaClave){
+        return next (new ErrorHandler("La contraseña actual no es correcta", 401))
+    }
+
+    user.clave= req.body.newPassword;
+    await user.save();
+
+    tokenEnviado(user, 200, res)
+})
+//Update perfil de usuario (debe estar logueado)
+exports.updateProfile= catchAsyncErrors(async(req,res,next)=>{
+    //Actualizar el email por user 
+    const newUserData ={
+        nombre: req.body.nombre,
+        email: req.body.correo
+    }
+
+    //updata Avatar
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new:true,
+        runValidators:true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+
+// Servicios administrables solo para el administrador (ADMIN)
+
+// Ver listado de usuarios
+exports.getAllUsers= catchAsyncErrors(async(req, res, next)=>{
+    const users = await User.find();
+
+    res.status(200).json({
+        success:true,
+        users
+    })
+})
+
+//Ver detalle de un usuario 
+exports.getUserDetails= catchAsyncErrors(async(req, res, next)=>{
+    const user= await User.findById(req.params.id);
+
+    if (!user){
+        return next(new ErrorHandler(`No se encontro ningún usuario registrado con il id: ${req.params.id}`))
+    }
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
+//Actualizar perfil de un usuario (solo lo puede hacer un administrador)
+exports.updateUser= catchAsyncErrors (async(req, res, next)=>{
+    const nuevaData={
+        nombre: req.body.nombre,
+        correo: req.body.correo,
+        role: req.body.rol
+    }
+
+    const user= await User.findByIdAndUpdate(req.params.id, nuevaData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+//Eliminar un usuario (admin)
+exports.deleteUser= catchAsyncErrors (async (req, res, next)=>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(`Usuario con id: ${req.params.id} 
+        no se encuentra en nuestra base de datos`))
+    }
+
+    await user.remove();
+
+    res.status(200).json({
+        success:true,
+        message:"Usuario eliminado correctamente"
+    })
+})
