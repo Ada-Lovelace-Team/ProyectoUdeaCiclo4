@@ -6,7 +6,7 @@ import { authReducer } from './reducer/userReducer';
 
 const reducer= combineReducers ({
     products:productsReducer,
-    authUser: authReducer
+    auth: authReducer
 })
 
 let initialState = {}

@@ -4,18 +4,25 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors")
 const tokenEnviado = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require ("crypto")
+const cloudinary= require("cloudinary")
 //Metodo que me va permitir registrar un nuevo usuario /api/usuario/registro
 
 exports.registroUsuario= catchAsyncErrors(async(req, res, next) =>{
     const {nombre, correo, clave} = req.body;
+
+    const result= await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder:"avatars",
+        width:240,
+        crop:"scale"
+    })
 
     const user = await User.create({
         nombre,
         correo,
         clave,
         avatar:{
-            public_id: "205838163",
-            url:"https://thumbs.dreamstime.com/b/person-icon-flat-design-template-isolated-avatar-symbol-vector-illustration-person-icon-flat-design-template-isolated-avatar-sign-205838163.jpg"
+            public_id: result.public_id,
+            url: result.secure_url
         }
     })
     const token = user.getJwtToken ();

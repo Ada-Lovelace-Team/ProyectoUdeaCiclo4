@@ -4,7 +4,10 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    REGISTER_USER_FAIL,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_REQUEST
 } from "../constants/userConstants"
 //login
 export const login = (email, password) => async (dispatch) =>{
@@ -16,7 +19,8 @@ export const login = (email, password) => async (dispatch) =>{
                  'Content-type': 'application/json'
                 }
         }
-        conts (data) = await axios.get('/api/login', {email, password},config)
+        
+        const {data} = await axios.post('/api/login', {email, password}, config)
 
         dispatch({
             type:LOGIN_SUCCESS,
@@ -30,6 +34,31 @@ export const login = (email, password) => async (dispatch) =>{
             payload:error.response.data.message
         })
 
+    }
+}
+//registrar usuario
+
+export const register = (userData) => async (dispatch) => {
+    try {
+        dispatch({ type: REGISTER_USER_REQUEST })
+
+        const config={
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+        const {data} = await axios.post('/api/usuario/registro', userData, config)
+
+        dispatch({
+            type: REGISTER_USER_SUCCESS,
+            payload: data.user
+        })
+    }
+    catch (error) { 
+        dispatch({
+            type: REGISTER_USER_FAIL,
+            payload: error.response.data.message
+        })
     }
 }
 //clear error
