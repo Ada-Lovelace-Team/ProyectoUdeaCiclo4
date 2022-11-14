@@ -27,7 +27,10 @@ function App() {
           <Route path="/listaProductos" element={<ListProducts/>}/>
           <Route path="/nuevoProducto" element={<NewProduct />}/>
           <Route path="/modProducto" element={<ModProduct />}/>
+          <Route path="/search/:keyword" element={<Home />}/>
           <Route path="/carrito" element={<Carro />}/>
+          
+
 
          </Routes>
       </div>
