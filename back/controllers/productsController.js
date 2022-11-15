@@ -92,7 +92,7 @@ exports.updateProduct= catchAsyncErrors (async (req,res,next) =>{
 
  // crear un feedback
 
- 
+
  //MECANISMO FETCH
  function verProductos(){
     fetch('http://localhost:4000/api/productos')

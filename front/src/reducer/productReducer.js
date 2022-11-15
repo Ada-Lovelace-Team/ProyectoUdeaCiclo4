@@ -18,9 +18,9 @@ import { ALL_PRODUCTS_REQUEST,
                 return{
                     loading:false,
                     products: action.payload.products,
-                    cantidad: action.payload.cantidad,
+                    productsCount: action.payload.productsCount,
                     resPerPage: action.payload.resPerPage,
-                    filteredProductsCount:action.payload.filteredProductsCount
+                    filteredProductsCount: action.payload.filteredProductsCount
                 }
     
             case ALL_PRODUCTS_FAIL:
