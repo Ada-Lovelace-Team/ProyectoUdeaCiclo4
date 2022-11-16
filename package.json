@@ -23,13 +23,21 @@
   },
   "homepage": "https://github.com/AnaC1997/ProyectoUdeaCiclo4#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
+    "expres": "^0.0.5",
     "express": "^4.18.2",
-    "mongoose": "^6.6.5",
-    "node-fetch": "^3.2.10"
+    "jsonwebtoken": "^8.5.1",
+    "mdbreact": "^4.26.0",
+    "mongoose": "^6.7.1",
+    "node-fetch": "^3.2.10",
+    "nodemailer": "^6.8.0",
+    "react-js-pagination": "^3.0.3",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
   }
-
 }

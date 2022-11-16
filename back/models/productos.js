@@ -86,6 +86,13 @@ const productosSchema = mongoose.Schema({
       },
     },
   ],
+
+  user:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
+},
+
   fechaCreacion: {
     type: Date,
     default: Date.now,
@@ -94,4 +101,4 @@ const productosSchema = mongoose.Schema({
 
 module.exports = mongoose.model("productos", productosSchema);
 
-module.exports=mongoose.model("productos",productosSchema) 
+
