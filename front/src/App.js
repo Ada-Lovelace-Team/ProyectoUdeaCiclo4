@@ -14,6 +14,10 @@ import ModProduct from './components/Admin/ModProduct';
 import { Login } from './components/user/Login';
 import { Register } from './components/user/Register';
 
+/*const express = require('express');
+/*const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');*/
+
 
 function App() {
   return (

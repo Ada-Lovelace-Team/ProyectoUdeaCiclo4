@@ -16,7 +16,7 @@ export const Home = () => {
         }
         dispatch(getProducts());
         //alert.succes("....") Generara una alerta
-    },[dispatch])
+    },[dispatch, alert, error])
     
   return (
     <Fragment>

@@ -7,7 +7,6 @@ module.exports =(err, req, res, next) =>{
     res.status(err.statusCode).json({
         success:false,
         message: err.stack
-
     })
     // error de clave duplicada en mongoose
     if (err.code=== 11000){

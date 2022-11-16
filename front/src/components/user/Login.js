@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import MetaData from '../layout/MetaData'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
 import { clearErrors, login } from '../../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,31 +8,28 @@ export const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail]= useState ("")
     const [password, setPassword]= useState("")
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const { isAuthenticated, error, loading}= useSelector(state => state.auth)
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate("/")
+            navigate ("/")
         }
         if (error) {
             dispatch(clearErrors)
         }
-    }, [dispatch, isAuthenticated, error ])
+    }, [dispatch, isAuthenticated, error])
 
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(login(email, password))
 
-
-
     }
-
-
-
   return (
     <Fragment>
-    <MetaData title={"Inicie Sesiòn"}/>
+        {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
+    <Fragment>
+   <MetaData title={"Inicie Sesiòn"}/>
     <div className= 'row wrapper'>
         <div className= 'col-10 col-lg-5'>
             <form className='shadow-lg' onSubmit={submitHandler}>
@@ -68,6 +65,7 @@ export const Login = () => {
         </div>
     </div>
 </Fragment>
-
-)
+)}
+</Fragment>
+  )
 }

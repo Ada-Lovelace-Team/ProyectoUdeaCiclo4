@@ -11,14 +11,14 @@ const usuarioSchema = new mongoose.Schema({
         required: [true, "Por favor ingrese el nombre"],
         maxlength: [130, "Nombre no puede exceder los 130 caracteres"]
     },
-    correo: {
+    email: {
         type: String,
         required: [true, "Por favor ingrese el correo electronico"],
         unique: true,
         validate: [validator.isEmail, "Por favor ingrese un correo electronico valido"]
    
     },
-    clave: {
+    password: {
         type: String,
         required: [true, "Por favor registre una contraseña"],
         minlength: [8, "Su contraseña no puede tener menos de 8 caracteres"],
@@ -48,15 +48,15 @@ const usuarioSchema = new mongoose.Schema({
 })
 //Encriptamos la contrasena antes de guardarla
 usuarioSchema.pre("save", async function (next) {
-    if (!this.isModified("clave")) {
+    if (!this.isModified("password")) {
         next()
     }
-    this.clave = await bcrypt.hash(this.clave, 10)
+    this.password = await bcrypt.hash(this.password, 10)
 })   
 // Decodificamos contrasena y comparamos
 
 usuarioSchema.methods.compararPass = async function (passDada){
-    return await bcrypt.compare(passDada, this.clave)
+    return await bcrypt.compare(passDada, this.password)
 }
  usuarioSchema.methods.getJwtToken = function () {
     return jwt.sign({id: this._id},process.env.JWT_secret,{

@@ -8,7 +8,7 @@ const cloudinary= require("cloudinary")
 //Metodo que me va permitir registrar un nuevo usuario /api/usuario/registro
 
 exports.registroUsuario= catchAsyncErrors(async(req, res, next) =>{
-    const {nombre, correo, clave} = req.body;
+    const {nombre, email, password} = req.body;
 
     const result= await cloudinary.v2.uploader.upload(req.body.avatar,{
         folder:"avatars",
@@ -18,8 +18,8 @@ exports.registroUsuario= catchAsyncErrors(async(req, res, next) =>{
 
     const user = await User.create({
         nombre,
-        correo,
-        clave,
+        email,
+        password,
         avatar:{
             public_id: result.public_id,
             url: result.secure_url
@@ -36,22 +36,22 @@ exports.registroUsuario= catchAsyncErrors(async(req, res, next) =>{
 //Inician sesion 
 
 exports.loginUser =catchAsyncErrors(async(req,res,next)=> {
-    const{correo,clave} =req.body;
+    const{email,password} =req.body;
 
 // revisar si los campos estan diligenciados
-if (!correo || !clave){
+if (!email || !password){
     return next(new ErrorHandler("Por favor ingrese el correo y la contraseña", 400))
 }
 // revisar si el usuario esta registrado en el db
 
-const user =await User.findOne ({correo}).select("+clave")
+const user =await User.findOne ({email}).select("+password")
 
 if(!user){
     return next(new ErrorHandler("Correo o contraseña incorrectos", 401))
 }
 
 // conpara si la contrasena coincide 
-const claveOK= await user.compararPass(clave);
+const claveOK= await user.compararPass(password);
 if (!claveOK){
     return next (new ErrorHandler("Contraseña incorrecta", 401))
 }
@@ -76,7 +76,7 @@ exports.logOut = catchAsyncErrors(async(req, res, next)=>{
 // olvide contrasena
 
 exports.forgotPassword = catchAsyncErrors ( async( req, res, next) =>{
-    const user= await User.findOne({correo: req.body.correo});
+    const user= await User.findOne({email: req.body.email});
 
     if (!user){
         return next(new ErrorHandler("Usuario no se encuentra registrado", 404))
@@ -87,7 +87,7 @@ exports.forgotPassword = catchAsyncErrors ( async( req, res, next) =>{
 
     // crear una url para el reset de contrasena
 
-    const resetUrl= `${req.protocol}://${req.get("host")}/api/resetClave/${resetToken}`;
+    const resetUrl= `${req.protocol}://${req.get("host")}/api/resetPassword/${resetToken}`;
 
     const mensaje=`Hola!\n\nEl link para ajustar una nueva contraseña es el 
     siguiente: \n\n${resetUrl}\n\n
@@ -95,13 +95,13 @@ exports.forgotPassword = catchAsyncErrors ( async( req, res, next) =>{
 
     try{
         await sendEmail({
-            email:user.correo,
+            email:user.email,
             subject: "Comfort Life Recuperación de la contraseña",
             mensaje
         })
         res.status(200).json({
             success:true,
-            message: `Correo enviado a: ${user.correo}`
+            message: `Correo enviado a: ${user.email}`
         })
     }catch(error){
         user.resetPasswordToken=undefined;
@@ -135,7 +135,7 @@ exports.resetPassword = catchAsyncErrors(async (req,res,next) =>{
     }
 
     //Setear la nueva contraseña
-    user.password=req.body.clave;
+    user.password=req.body.password;
     user.resetPasswordToken=undefined;
     user.resetPasswordExprire=undefined;
 
@@ -153,7 +153,7 @@ exports.getUserProfile =catchAsyncErrors (async(req, res, next)=>{
 })
 //update contrasena de usuario logueado
 exports.updatePassword= catchAsyncErrors(async (req, res, next) =>{
-    const user= await User.findById(req.user.id).select("+clave");
+    const user= await User.findById(req.user.id).select("+password");
 
     //Revisamos si la contraseña antigua es igual a la nueva
     const mismaClave = await user.compararPass(req.body.oldPassword)
@@ -162,7 +162,7 @@ exports.updatePassword= catchAsyncErrors(async (req, res, next) =>{
         return next (new ErrorHandler("La contraseña actual no es correcta", 401))
     }
 
-    user.clave= req.body.newPassword;
+    user.password= req.body.newPassword;
     await user.save();
 
     tokenEnviado(user, 200, res)
@@ -172,7 +172,7 @@ exports.updateProfile= catchAsyncErrors(async(req,res,next)=>{
     //Actualizar el email por user 
     const newUserData ={
         nombre: req.body.nombre,
-        email: req.body.correo
+        email: req.body.email
     }
 
     //updata Avatar
@@ -182,12 +182,12 @@ exports.updateProfile= catchAsyncErrors(async(req,res,next)=>{
         runValidators:true,
         useFindAndModify: false
     })
-
     res.status(200).json({
         success:true,
         user
     })
 })
+  
 
 // Servicios administrables solo para el administrador (ADMIN)
 
@@ -219,7 +219,7 @@ exports.getUserDetails= catchAsyncErrors(async(req, res, next)=>{
 exports.updateUser= catchAsyncErrors (async(req, res, next)=>{
     const nuevaData={
         nombre: req.body.nombre,
-        correo: req.body.correo,
+        email: req.body.email,
         role: req.body.rol
     }
 

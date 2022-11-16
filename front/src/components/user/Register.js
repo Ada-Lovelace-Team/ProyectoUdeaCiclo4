@@ -3,8 +3,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import MetaData from '../layout/MetaData'
 import { register, clearErrors } from '../../actions/userActions'
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom' 
 
 
 export const Register = () => {
@@ -13,7 +12,7 @@ export const Register = () => {
         email: "",
         password: "",
     })
-    const navigate= useNavigate
+    const navigate= useNavigate();
     const {nombre, email, password} = user;
     const [avatar, setAvatar] = useState("");
     const [avatarPreview, setAvatarPreview]= useState("https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133352152-stock-illustration-default-placeholder-profile-icon.jpg.")
@@ -21,14 +20,17 @@ export const Register = () => {
     const dispatch= useDispatch();
     const { isAuthenticated, error, loading} =useSelector(state => state.auth)
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/")
+
+    useEffect (() => {
+        if (isAuthenticated){
+            navigate ("/")
         }
-        if (error) {
+        if (error){
             dispatch(clearErrors)
+            
         }
-    }, [dispatch, isAuthenticated, error, alert])
+    }, [isAuthenticated, error, dispatch,alert])
+
 
     const submitHandler = (e) =>{
         e.preventDefault();
