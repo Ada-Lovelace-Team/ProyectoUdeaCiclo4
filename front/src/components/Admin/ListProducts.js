@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 
 export const ListProducts = () => {
-    const { loading, productos, error} = useSelector(state=> state.products)
+    const { loading, products, error} = useSelector(state=> state.products)
     const alert= useAlert();
 
     const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export const ListProducts = () => {
             rows: []
         }
 
-        productos.forEach(product => {
+        products.forEach(product => {
             data.rows.push({
                 id: product._id,
                 nombre: product.nombre,
