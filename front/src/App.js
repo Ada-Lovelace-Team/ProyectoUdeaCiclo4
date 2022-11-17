@@ -12,6 +12,7 @@ import NewProduct from './components/Admin/NewProduct';
 import Carro from './components/Carrito/Carro';
 import ModProduct from './components/Admin/ModProduct';
 import { Login } from './components/user/Login';
+import { Register } from './components/user/Register';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/search/:keyword" element={<Home />}/>
           <Route path="/carrito" element={<Carro />}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
 
           
 

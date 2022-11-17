@@ -1,11 +1,15 @@
 const express=require("express");
 const app=express();
 const errorMiddleware =require("./middleware/error")
-const cookieParse=require("cookie-parser")
+const cookieParser=require("cookie-parser")
+const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload')
 
 // Uso de constantes importadas
 app.use(express.json());
-app.use(cookieParse());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(fileUpload());
 
 //Importamos rutas
 const productos=require("./routes/products")
