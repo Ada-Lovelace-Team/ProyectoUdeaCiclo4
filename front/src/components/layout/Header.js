@@ -2,8 +2,11 @@ import React, { Fragment } from 'react'
 import "../../App.css"
 import { Link } from "react-router-dom"
 import { Search } from './Search'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+  const {cartItems} = useSelector(state=>state.cart)
+
   return (
     <Fragment>
       <nav className='navbar row'>
@@ -34,7 +37,7 @@ const Header = () => {
           </div>
 
           <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
-            <span className="ml-1" id="cart_count">2</span></Link>
+          <span className="ml-1" id="cart_count">{cartItems.length}</span></Link>
         </div>
 
       </nav>
