@@ -8,7 +8,7 @@ const productosSchema = mongoose.Schema({
     maxLength: [
       120,
       "El nombre del producto no debe exceder los 120 caracteres.",
-    ],
+    ]
   },
   precio: {
     type: Number,
@@ -17,7 +17,7 @@ const productosSchema = mongoose.Schema({
       10,
       "El precio del producto no puede estar por enciama de 9'999'999.999",
     ],
-    default: 0.0,
+    default: 0.0
   },
   talla: {
     type: Number,
@@ -25,9 +25,8 @@ const productosSchema = mongoose.Schema({
     enum: {
       values: [
         18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
-        36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
-      ],
-    },
+        36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47],
+    }
   },
   descripcion: {
     type: String,
@@ -35,7 +34,7 @@ const productosSchema = mongoose.Schema({
   },
   calificacion: {
     type: Number,
-    default: 0,
+    default: 0
   },
   imagen: [
     {
@@ -46,16 +45,20 @@ const productosSchema = mongoose.Schema({
       url: {
         type: String,
         required: true,
-      },
-    },
+      }
+    }
   ],
-  categoria: {
-    type: String,
-    required: [true, "Por favor seleccione la categoria del producto."],
-    enum: {
-      values: ["Mujer", "Hombre", "Niños"],
-    },
-  },
+  categoria:{
+    type:String,
+    required:[false,"Por favor seleccione la categoria del producto."],
+    enum:{
+        values:[
+            "Mujeres",
+            "Hombres",
+            "Niños"
+        ]
+    }
+},
   proveedor: {
     type: String,
     required: [true, "Por favor ingrese el nombre del proveedor"],
@@ -83,8 +86,8 @@ const productosSchema = mongoose.Schema({
       comentario: {
         type: String,
         required: true,
-      },
-    },
+      }
+    }
   ],
 
   user:{

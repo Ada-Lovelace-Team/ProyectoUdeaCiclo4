@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact';
 import MetaData from '../layout/MetaData';
 import Sidebar from './Sidebar';
 import { useAlert } from 'react-alert';
-import { getProducts } from '../../actions/productActions'; 
+import { clearErrors, getAdminProducts} from '../../actions/productActions'; 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'; 
 
@@ -11,17 +12,20 @@ import { useSelector } from 'react-redux';
 
 
 export const ListProducts = () => {
-    const { loading, products, error} = useSelector(state=> state.products)
     const alert= useAlert();
-
     const dispatch = useDispatch();
+    const { loading, error,products} = useSelector(state=> state.products);
+
+   
     useEffect(() => {
-        if (error){
-            return alert.error(error)
+        dispatch(getAdminProducts());
+
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors())
         }
 
-        dispatch(getProducts());
-    }, [dispatch])
+    }, [dispatch, alert, error])
 
     const setProducts = () => {
         const data = {
@@ -46,6 +50,11 @@ export const ListProducts = () => {
                     field: 'inventario',
                     sort: 'asc'
                 },
+                {
+                    label: 'Acciones',
+                    field: 'acciones',
+                },
+
             ],
             rows: []
         }
@@ -56,6 +65,13 @@ export const ListProducts = () => {
                 nombre: product.nombre,
                 precio: `$${product.precio}`,
                 inventario: product.inventario,
+                acciones: <Fragment>
+                <Link to={`/producto/${product._id}`} className="btn btn-primary py-1 px-2">
+                    <i className="fa fa-eye"></i>
+                </Link><Link to={`/updateProduct/${product._id}`} className="btn btn-warning py-1 px-2">
+                <i class="fa fa-pencil"></i>
+                </Link>
+                </Fragment>
             })
         })
 
@@ -87,7 +103,7 @@ export const ListProducts = () => {
                     </Fragment>
                 </div>
             </div>
-
+àò
         </Fragment>
     )
 }

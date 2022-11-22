@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css'
 export const Home = () => {
     const params = useParams();
     const keyword = params.keyword;
-    const [precio, setPrecio] = useState([10000, 3000000])
+    const [precio, setPrecio] = useState([100, 3000000])
     const [currentPage, setCurrentPage] = useState(1)
     const { loading, products, error, resPerPage, productsCount } = useSelector(state => state.products)
     const alert = useAlert();
@@ -43,12 +43,12 @@ export const Home = () => {
                             range
                             className='t-slider'
                             marks={{
-                                10000: `$10000`,
+                                100: `$100`,
                                 3000000: `$3000000`
                             }}
-                            min={1000}
+                            min={100}
                             max={3000000}
-                            defaultValue={[10000, 3000000]}
+                            defaultValue={[100, 3000000]}
                             tipFormatter={value => `$${value}`}
                             tipProps={{
                                 placement: 'top',
