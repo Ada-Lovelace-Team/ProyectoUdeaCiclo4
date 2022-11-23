@@ -23,10 +23,6 @@ const Sidebar = () => {
                                 <Link to="/nuevoProducto"><i className="fa fa-plus"></i> Agregar producto</Link>
                             </li>
 
-                            <li>
-                                <Link to="/modProducto"><i className="fa fa-clipboard"></i> Modificar producto</Link>
-                            </li>
-
                         </ul>
                     </li>
 

@@ -13,7 +13,13 @@ import {
     ADMIN_PRODUCTS_FAIL,
     NEW_PRODUCT_REQUEST,
     NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_FAIL
+    NEW_PRODUCT_FAIL,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_FAIL
 
 } from '../constants/productConstants';
 
@@ -81,6 +87,31 @@ export const newProduct = ( productData ) => async (dispatch)=>{
     }
 }
 
+// Update producto-usiario administrador
+export const updateProduct = (id, productData) => async (dispatch) =>{
+    try{
+        dispatch ({type: UPDATE_PRODUCT_REQUEST})
+
+        const config={
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        const {data} = await axios.put(`/api/producto/${id}`, productData, config)
+
+        dispatch({
+            type: UPDATE_PRODUCT_SUCCESS,
+            payload: data.success
+        })
+    } catch(error){
+        dispatch({
+            type: UPDATE_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+        
+
 
 
 //ver detalle del producto
@@ -102,6 +133,27 @@ export const getProductDetails = (id) => async (dispatch) => {
                     })
                 }
             }
+
+    //Eliminar producto, usuario administrador
+
+    export const deleteProduct = (id) => async(dispatch)=>{
+        try{
+            dispatch ({type: DELETE_PRODUCT_REQUEST})
+            const {data} = await axios.delete(`/api/producto/${id}`)
+
+            dispatch({
+                type: DELETE_PRODUCT_SUCCESS,
+                payload: data.success
+            })
+        } catch(error){
+            dispatch({
+                type: DELETE_PRODUCT_FAIL,
+                payload: error.response.data.message
+            })
+        }
+    }
+    
+
     //Metodo para los errores
     export const clearErrors = () => async (dispatch) => {
                 dispatch({

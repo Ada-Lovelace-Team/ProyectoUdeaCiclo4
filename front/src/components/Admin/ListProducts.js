@@ -4,7 +4,7 @@ import { MDBDataTable } from 'mdbreact';
 import MetaData from '../layout/MetaData';
 import Sidebar from './Sidebar';
 import { useAlert } from 'react-alert';
-import { clearErrors, getAdminProducts} from '../../actions/productActions'; 
+import { clearErrors, deleteProduct, getAdminProducts} from '../../actions/productActions'; 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'; 
 
@@ -16,6 +16,14 @@ export const ListProducts = () => {
     const dispatch = useDispatch();
     const { loading, error,products} = useSelector(state=> state.products);
 
+    const deleteProductHandler= (id)=> {
+        const response=window.confirm("Desea continuar con la eliminación del producto?")
+        if (response){
+            dispatch(deleteProduct(id))
+            alert.success("Producto eliminado correctamente")
+            window.location.reload(false)
+        }
+    }
    
     useEffect(() => {
         dispatch(getAdminProducts());
@@ -71,10 +79,12 @@ export const ListProducts = () => {
                 </Link><Link to={`/updateProduct/${product._id}`} className="btn btn-warning py-1 px-2">
                 <i class="fa fa-pencil"></i>
                 </Link>
+                <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
+                        <i className="fa fa-trash"></i>
+                    </button>
                 </Fragment>
             })
         })
-
         return data;
     }
 
