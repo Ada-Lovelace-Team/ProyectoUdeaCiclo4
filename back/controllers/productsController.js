@@ -7,7 +7,7 @@ const cloudinary = require("cloudinary")
 
 //Ver la lista de productos
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-    const resPerPage = 15;
+    const resPerPage = 6;
     const productsCount = await producto.countDocuments();
 
     const apiFeatures = new APIFeatures(producto.find(), req.query)

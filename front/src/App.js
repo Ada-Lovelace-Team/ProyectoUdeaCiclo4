@@ -18,6 +18,9 @@ import store from "./store"
 import { Profile } from './components/user/Profile';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Envio from './components/Carrito/Envio';
+import { ConfirmOrder } from './components/Carrito/ConfirmOrder';
+import { Payment } from './components/Carrito/Payment';
+import { Succes } from './components/Carrito/Succes';
 
 function App() {
   useEffect(() => {
@@ -52,6 +55,15 @@ function App() {
               element={<ProtectedRoute isAdmin={true}><UpdateProduct /></ProtectedRoute>} />
             <Route path="/shipping"
               element={<ProtectedRoute><Envio /></ProtectedRoute>} />
+            <Route path="/order/confirm"
+              element={<ProtectedRoute><ConfirmOrder /></ProtectedRoute>} />
+
+            <Route path="/payment"
+              element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+
+            <Route path="/success"
+              element={<ProtectedRoute><Succes /></ProtectedRoute>} />
+
 
 
 
